@@ -95,34 +95,34 @@ public class Hello_world {
 				  DataInputStream dis = btc.openDataInputStream();
 				  //envoie de la BD
 				  DataOutputStream out = btc.openDataOutputStream();
-				 // String msg_out = "/T1;7;/T2;7;/T3;7;/Lum;1;lumiere;true;50;/ConfStandard;1;conf1;1;2;3;true;/ConfCour;2;conf2;1;4;/Conf;3;conf3;5;1;false;";
-				  //out.writeUTF(msg_out);  
-				  //out.flush();	
+				  String msg_out = "/T1;7;/T2;7;/T3;7;/Lum;1;lumiere;true;50;/ConfStandard;1;conf1;1;2;3;true;/ConfCour;2;conf2;1;4;/Conf;3;conf3;5;1;false;";
+				  out.writeUTF(msg_out);  
+				  out.flush();	
 				  boolean isSomeOneInRoom = true;
 				// Loop for read data  
 
 				  while (isrunning) {
 			
 
-					int msg = dis.readInt();
+					byte msg = dis.readByte();
 
 						LCD.clear();
 					    LCD.drawString("JE RECOIS UN TRUC", 4, 4); //à supprimer : affichage du message recu sur la brique
 						LCD.refresh(); 
 						  
-					if(msg == 1) {
+					if(msg == 00000001) {
 						LCD.clear();
 					    LCD.drawString("Lum 1 : on", 4, 4); //à supprimer : affichage du message recu sur la brique
 						LCD.refresh(); 
 					}
-					else if(msg == 2){
+					else if(msg == 00000010){
 						LCD.clear();
 					    LCD.drawString("Lum 1 : off", 4, 4); //à supprimer : affichage du message recu sur la brique
 						LCD.refresh(); 
 					}
 					else {
 						LCD.clear();
-					    LCD.drawString("Un pb, msg = "+Integer.toString(msg), 4, 4); //à supprimer : affichage du message recu sur la brique
+					    LCD.drawString("Un pb, msg = "+Byte.toString(msg), 4, 4); //à supprimer : affichage du message recu sur la brique
 						LCD.refresh(); 
 					}
 					
